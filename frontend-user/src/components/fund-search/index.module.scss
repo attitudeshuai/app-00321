@@ -1,0 +1,60 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.searchWrapper {
+  padding: 0 $spacing-md $spacing-sm;
+}
+
+.searchInputWrap {
+  @include flex-align-center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  border-radius: $radius-lg;
+  border: 1px solid rgba(22, 119, 255, 0.12);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:focus-within {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.08);
+    background: #fff;
+  }
+}
+
+.searchIcon {
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  outline: none;
+  min-width: 0;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+}
+
+.clearBtn {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:active {
+    background: rgba(0, 0, 0, 0.15);
+    transform: scale(0.92);
+  }
+}

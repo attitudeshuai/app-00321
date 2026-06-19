@@ -7,15 +7,18 @@
   padding-top: calc($navbar-height + $safe-area-top);
 }
 
-// 分类标签
-.categoryWrapper {
+.stickyHeader {
   position: sticky;
   top: 0;
   z-index: $z-index-sticky - 1;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
-  padding: $spacing-md;
+  padding-top: $spacing-sm;
   @include border-1px(rgba(22, 119, 255, 0.08), bottom);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.categoryWrapper {
+  padding: $spacing-xs $spacing-md $spacing-md;
 }
 
 .categoryList {
@@ -23,8 +26,7 @@
   gap: $spacing-xs;
   overflow-x: auto;
   @include hide-scrollbar;
-  // 留出足够空间避免 tab 的 box-shadow(0 4px 12px) 被裁切
-  padding: 14px 0;
+  padding: 4px 0;
 }
 
 .categoryItem {
@@ -40,38 +42,20 @@
   overflow: hidden;
   will-change: transform, background-color;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(22, 119, 255, 0.1), transparent);
-    transition: left 0.3s;
-  }
-
   &.active {
     color: #fff;
     background: $gradient-primary;
     font-weight: $font-weight-semibold;
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
-    // transform: scale(1.05);
-
-    // &::before {
-    //   left: 100%;
-    // }
   }
 
   &:not(.active):active {
     background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
     border-color: rgba(22, 119, 255, 0.2);
-    // transform: scale(0.98);
   }
 }
 
-// 列表头部
 .listHeader {
   @include flex-between;
   padding: $spacing-md;
@@ -83,44 +67,70 @@
   color: $color-text-tertiary;
 }
 
-.sortOptions {
-  display: flex;
-  gap: $spacing-md;
+.headerActions {
+  @include flex-align-center;
+  gap: $spacing-sm;
 }
 
-.sortBtn {
+.activeFiltersBar {
   @include flex-align-center;
-  gap: $spacing-xxs;
-  padding: $spacing-xs $spacing-sm;
-  font-size: $font-size-sm;
-  color: $color-text-secondary;
-  background: transparent;
-  border-radius: $radius-md;
+  gap: $spacing-sm;
+  padding: 0 $spacing-md $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.activeFiltersLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.activeTags {
+  @include flex-align-center;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.activeTag {
+  @include flex-align-center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: $font-size-xs;
+  color: $color-primary;
+  background: rgba(22, 119, 255, 0.08);
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
   transition: all $transition-fast;
 
-  &.active {
-    color: $color-primary;
-    background: rgba(22, 119, 255, 0.1);
-  }
-
   &:active {
-    color: $color-primary;
     background: rgba(22, 119, 255, 0.15);
   }
 
   svg {
-    color: currentColor;
-    transition: transform $transition-fast;
+    opacity: 0.6;
   }
 }
 
-// 基金列表
+.resetBtn {
+  padding: 2px 8px;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:active {
+    color: $color-primary;
+  }
+}
+
 .fundList {
   background: transparent;
   padding: 0 $spacing-md;
 }
 
-// 空状态
 .emptyState {
   @include flex-center;
   flex-direction: column;
@@ -135,9 +145,24 @@
 
 .emptyText {
   font-size: $font-size-md;
+  margin-bottom: $spacing-md;
 }
 
-// 底部安全区域
+.emptyResetBtn {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-sm;
+  color: $color-primary;
+  background: rgba(22, 119, 255, 0.08);
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:active {
+    background: rgba(22, 119, 255, 0.15);
+  }
+}
+
 .safeAreaBottom {
   height: calc($spacing-md + $safe-area-bottom);
   background: transparent;

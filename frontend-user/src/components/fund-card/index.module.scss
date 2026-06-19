@@ -67,6 +67,44 @@
   color: $color-text-tertiary;
 }
 
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.riskTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: $font-weight-medium;
+  border: 1px solid;
+  border-radius: $radius-sm;
+  line-height: 1.4;
+}
+
+.companyTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: 10px;
+  color: $color-text-secondary;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: $radius-sm;
+  line-height: 1.4;
+}
+
+.scaleTag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  color: $color-text-tertiary;
+  line-height: 1.4;
+}
+
 .navRow {
   display: flex;
   align-items: baseline;
