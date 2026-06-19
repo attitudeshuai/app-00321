@@ -7,13 +7,76 @@
   padding-top: calc($navbar-height + $safe-area-top);
 }
 
+// 搜索框
+.searchWrapper {
+  position: sticky;
+  top: calc($navbar-height + $safe-area-top);
+  z-index: $z-index-sticky;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+}
+
+.searchBox {
+  @include flex-align-center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  background: linear-gradient(135deg, #F5F7FA 0%, #EEF2F7 100%);
+  border-radius: $radius-full;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+  transition: all $transition-normal;
+
+  &:focus-within {
+    background: #FFFFFF;
+    border-color: rgba(22, 119, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
+  }
+}
+
+.searchIcon {
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  outline: none;
+  font-family: inherit;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+}
+
+.clearBtn {
+  @include flex-center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: $radius-full;
+  background: $color-text-quaternary;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+
+  &:active {
+    background: $color-text-tertiary;
+    transform: scale(0.95);
+  }
+}
+
 // 分类标签
 .categoryWrapper {
   position: sticky;
-  top: 0;
+  top: calc($navbar-height + $safe-area-top + 52px);
   z-index: $z-index-sticky - 1;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
-  padding: $spacing-md;
+  padding: $spacing-xs $spacing-md $spacing-sm;
   @include border-1px(rgba(22, 119, 255, 0.08), bottom);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
@@ -23,8 +86,7 @@
   gap: $spacing-xs;
   overflow-x: auto;
   @include hide-scrollbar;
-  // 留出足够空间避免 tab 的 box-shadow(0 4px 12px) 被裁切
-  padding: 14px 0;
+  padding: 8px 0;
 }
 
 .categoryItem {
@@ -57,17 +119,197 @@
     font-weight: $font-weight-semibold;
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
-    // transform: scale(1.05);
-
-    // &::before {
-    //   left: 100%;
-    // }
   }
 
   &:not(.active):active {
     background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
     border-color: rgba(22, 119, 255, 0.2);
-    // transform: scale(0.98);
+  }
+}
+
+// 筛选工具栏
+.filterBar {
+  @include flex-between;
+  padding: $spacing-sm $spacing-md;
+  background: #FFFFFF;
+  @include border-1px(rgba(0, 0, 0, 0.05), bottom);
+}
+
+.filterBtn {
+  @include flex-align-center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: linear-gradient(135deg, #F5F7FA 0%, #EEF2F7 100%);
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+  transition: all $transition-fast;
+  position: relative;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.08);
+    border-color: rgba(22, 119, 255, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  svg {
+    color: currentColor;
+  }
+}
+
+.filterBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: #FFFFFF;
+  background: $color-rise;
+  border-radius: $radius-full;
+  @include flex-center;
+}
+
+.sortTabs {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.sortTab {
+  @include flex-align-center;
+  gap: 2px;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: transparent;
+  border-radius: $radius-md;
+  border: none;
+  transition: all $transition-fast;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.08);
+    font-weight: $font-weight-medium;
+  }
+
+  &:active {
+    background: rgba(22, 119, 255, 0.12);
+  }
+
+  svg {
+    color: currentColor;
+    transition: transform $transition-fast;
+  }
+}
+
+// 筛选面板
+.filterPanel {
+  background: #FFFFFF;
+  padding: $spacing-md;
+  @include border-1px(rgba(0, 0, 0, 0.05), bottom);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filterSection {
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.filterTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.filterOption {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: #F5F7FA;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.08);
+    border-color: rgba(22, 119, 255, 0.25);
+    font-weight: $font-weight-medium;
+  }
+
+  &:not(.active):active {
+    background: #EBEEF5;
+  }
+}
+
+.filterActions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  @include border-1px(rgba(0, 0, 0, 0.05), top);
+}
+
+.resetBtn {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  background: #F5F7FA;
+  border: none;
+  border-radius: $radius-lg;
+  font-weight: $font-weight-medium;
+  transition: all $transition-fast;
+
+  &:active {
+    background: #EBEEF5;
+    transform: scale(0.98);
+  }
+}
+
+.confirmBtn {
+  flex: 2;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-md;
+  color: #FFFFFF;
+  background: $gradient-primary;
+  border: none;
+  border-radius: $radius-lg;
+  font-weight: $font-weight-medium;
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(22, 119, 255, 0.3);
   }
 }
 
@@ -83,34 +325,20 @@
   color: $color-text-tertiary;
 }
 
-.sortOptions {
-  display: flex;
-  gap: $spacing-md;
-}
-
-.sortBtn {
+.sortClearBtn {
   @include flex-align-center;
   gap: $spacing-xxs;
-  padding: $spacing-xs $spacing-sm;
-  font-size: $font-size-sm;
-  color: $color-text-secondary;
-  background: transparent;
-  border-radius: $radius-md;
+  padding: $spacing-xxs $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-primary;
+  background: rgba(22, 119, 255, 0.08);
+  border: none;
+  border-radius: $radius-full;
   transition: all $transition-fast;
 
-  &.active {
-    color: $color-primary;
-    background: rgba(22, 119, 255, 0.1);
-  }
-
   &:active {
-    color: $color-primary;
     background: rgba(22, 119, 255, 0.15);
-  }
-
-  svg {
-    color: currentColor;
-    transition: transform $transition-fast;
+    transform: scale(0.96);
   }
 }
 
@@ -135,6 +363,30 @@
 
 .emptyText {
   font-size: $font-size-md;
+  margin-bottom: $spacing-lg;
+}
+
+.emptyActions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.resetSearchBtn {
+  padding: $spacing-sm $spacing-xl;
+  font-size: $font-size-sm;
+  color: $color-primary;
+  background: rgba(22, 119, 255, 0.08);
+  border: 1px solid rgba(22, 119, 255, 0.2);
+  border-radius: $radius-full;
+  font-weight: $font-weight-medium;
+  transition: all $transition-fast;
+
+  &:active {
+    background: rgba(22, 119, 255, 0.15);
+    transform: scale(0.98);
+  }
 }
 
 // 底部安全区域
