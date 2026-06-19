@@ -54,8 +54,53 @@ export const fundCategories = [
   { id: 'money', name: '货币型' },
 ];
 
+// 风险等级筛选项
+export const riskLevels = [
+  { id: 'all', name: '全部' },
+  { id: 'low', name: '低风险' },
+  { id: 'mid', name: '中风险' },
+  { id: 'high', name: '高风险' },
+];
+
+// 基金公司筛选项
+export const fundCompanies = [
+  { id: 'all', name: '全部' },
+  { id: 'huaxia', name: '华夏基金' },
+  { id: 'efunds', name: '易方达基金' },
+  { id: 'cmf', name: '招商基金' },
+  { id: 'tianhong', name: '天弘基金' },
+  { id: 'icbc', name: '工银瑞信' },
+  { id: 'southern', name: '南方基金' },
+  { id: 'jiashi', name: '嘉实基金' },
+  { id: 'fullgoal', name: '富国基金' },
+];
+
+// 规模区间筛选项（单位：亿）
+// 区间语义：[min, max)，左闭右开，确保边界值（如 10、50、100）只归属一档不重复计入
+export const fundScaleRanges = [
+  { id: 'all', name: '全部', min: -Infinity, max: Infinity },
+  { id: 'lt10', name: '小于10亿', min: -Infinity, max: 10 },
+  { id: '10to50', name: '10亿(含)-50亿', min: 10, max: 50 },
+  { id: '50to100', name: '50亿(含)-100亿', min: 50, max: 100 },
+  { id: 'gt100', name: '100亿及以上', min: 100, max: Infinity },
+];
+
 // 基金列表数据
-export const fundListData = [
+export interface FundListItem {
+  id: string;
+  code: string;
+  name: string;
+  type: string;
+  nav: number;
+  dayChange: number;
+  yearChange: number;
+  risk: 'low' | 'mid' | 'high';
+  companyId: string;
+  companyName: string;
+  scale: number; // 规模（亿）
+}
+
+export const fundListData: FundListItem[] = [
   {
     id: '001',
     code: '000001',
@@ -64,6 +109,10 @@ export const fundListData = [
     nav: 2.3456,
     dayChange: 2.35,
     yearChange: 28.56,
+    risk: 'mid',
+    companyId: 'huaxia',
+    companyName: '华夏基金',
+    scale: 156.78,
   },
   {
     id: '002',
@@ -73,6 +122,10 @@ export const fundListData = [
     nav: 1.8965,
     dayChange: -1.25,
     yearChange: 15.68,
+    risk: 'mid',
+    companyId: 'efunds',
+    companyName: '易方达基金',
+    scale: 386.52,
   },
   {
     id: '003',
@@ -82,6 +135,10 @@ export const fundListData = [
     nav: 1.2568,
     dayChange: 0.85,
     yearChange: -5.23,
+    risk: 'high',
+    companyId: 'cmf',
+    companyName: '招商基金',
+    scale: 78.34,
   },
   {
     id: '004',
@@ -91,6 +148,10 @@ export const fundListData = [
     nav: 1.0000,
     dayChange: 0.01,
     yearChange: 2.15,
+    risk: 'low',
+    companyId: 'tianhong',
+    companyName: '天弘基金',
+    scale: 7568.92,
   },
   {
     id: '005',
@@ -100,6 +161,10 @@ export const fundListData = [
     nav: 1.1256,
     dayChange: 0.12,
     yearChange: 4.56,
+    risk: 'low',
+    companyId: 'icbc',
+    companyName: '工银瑞信',
+    scale: 42.18,
   },
   {
     id: '006',
@@ -109,6 +174,10 @@ export const fundListData = [
     nav: 3.5689,
     dayChange: 3.68,
     yearChange: 45.23,
+    risk: 'high',
+    companyId: 'southern',
+    companyName: '南方基金',
+    scale: 23.65,
   },
   {
     id: '007',
@@ -118,6 +187,10 @@ export const fundListData = [
     nav: 1.5236,
     dayChange: 1.12,
     yearChange: 12.36,
+    risk: 'mid',
+    companyId: 'jiashi',
+    companyName: '嘉实基金',
+    scale: 89.45,
   },
   {
     id: '008',
@@ -127,6 +200,10 @@ export const fundListData = [
     nav: 2.8956,
     dayChange: -0.56,
     yearChange: 22.15,
+    risk: 'mid',
+    companyId: 'fullgoal',
+    companyName: '富国基金',
+    scale: 8.92,
   },
 ];
 

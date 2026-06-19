@@ -2,20 +2,18 @@
 
 import Link from 'next/link';
 import { formatPercent } from '@/lib/utils';
+import type { FundListItem } from '@/lib/mock-data';
 import styles from './index.module.scss';
 
-interface FundItem {
-  id: string;
-  code: string;
-  name: string;
-  type: string;
-  nav: number;
-  dayChange: number;
-  yearChange: number;
-}
+// 卡片只展示基金列表项的部分字段，使用 Pick 从数据模型派生，
+// 这样数据模型字段类型一变即可在编译期暴露问题，避免两边重复维护。
+export type FundCardData = Pick<
+  FundListItem,
+  'id' | 'code' | 'name' | 'nav' | 'dayChange' | 'yearChange'
+>;
 
 interface FundCardProps {
-  data: FundItem;
+  data: FundCardData;
 }
 
 export default function FundCard({ data }: FundCardProps) {
