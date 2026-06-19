@@ -4,18 +4,17 @@ import Link from 'next/link';
 import { formatPercent } from '@/lib/utils';
 import styles from './index.module.scss';
 
-interface FundItem {
+export interface FundCardData {
   id: string;
   code: string;
   name: string;
-  type: string;
   nav: number;
   dayChange: number;
   yearChange: number;
 }
 
 interface FundCardProps {
-  data: FundItem;
+  data: FundCardData;
 }
 
 export default function FundCard({ data }: FundCardProps) {
