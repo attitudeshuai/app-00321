@@ -7,13 +7,107 @@
   padding-top: calc($navbar-height + $safe-area-top);
 }
 
+// 搜索区域
+.searchWrapper {
+  @include flex-align-center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: #fff;
+}
+
+.searchBox {
+  flex: 1;
+  @include flex-align-center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: #F5F6F7;
+  border-radius: $radius-lg;
+  transition: all $transition-fast;
+
+  &:focus-within {
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+  }
+}
+
+.searchIcon {
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  outline: none;
+  height: 32px;
+
+  &::placeholder {
+    color: $color-text-quaternary;
+  }
+}
+
+.clearBtn {
+  @include flex-center;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  &:active {
+    color: $color-text-secondary;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.filterBtn {
+  @include flex-center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #F5F6F7;
+  color: $color-text-secondary;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all $transition-fast;
+  flex-shrink: 0;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.filterBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: $color-rise;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
 // 分类标签
 .categoryWrapper {
   position: sticky;
   top: 0;
   z-index: $z-index-sticky - 1;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
-  padding: $spacing-md;
+  padding: 0 $spacing-md $spacing-md;
   @include border-1px(rgba(22, 119, 255, 0.08), bottom);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
@@ -23,7 +117,6 @@
   gap: $spacing-xs;
   overflow-x: auto;
   @include hide-scrollbar;
-  // 留出足够空间避免 tab 的 box-shadow(0 4px 12px) 被裁切
   padding: 14px 0;
 }
 
@@ -57,17 +150,11 @@
     font-weight: $font-weight-semibold;
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
-    // transform: scale(1.05);
-
-    // &::before {
-    //   left: 100%;
-    // }
   }
 
   &:not(.active):active {
     background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
     border-color: rgba(22, 119, 255, 0.2);
-    // transform: scale(0.98);
   }
 }
 
@@ -85,7 +172,7 @@
 
 .sortOptions {
   display: flex;
-  gap: $spacing-md;
+  gap: $spacing-xs;
 }
 
 .sortBtn {
@@ -96,11 +183,14 @@
   color: $color-text-secondary;
   background: transparent;
   border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
   transition: all $transition-fast;
 
   &.active {
     color: $color-primary;
     background: rgba(22, 119, 255, 0.1);
+    font-weight: $font-weight-medium;
   }
 
   &:active {
@@ -141,4 +231,152 @@
 .safeAreaBottom {
   height: calc($spacing-md + $safe-area-bottom);
   background: transparent;
+}
+
+// 筛选面板遮罩
+.filterMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $color-bg-mask;
+  z-index: $z-index-modal-backdrop;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 筛选面板
+.filterPanel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: $radius-xl $radius-xl 0 0;
+  z-index: $z-index-modal;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-bottom: $safe-area-bottom;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.filterHeader {
+  @include flex-between;
+  padding: $spacing-md $spacing-lg;
+  @include border-1px($color-border-light, bottom);
+}
+
+.filterTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.closeBtn {
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: $color-text-tertiary;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+
+  &:active {
+    background: rgba(0, 0, 0, 0.05);
+    color: $color-text-secondary;
+  }
+}
+
+.filterContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg;
+  @include hide-scrollbar;
+}
+
+.filterSection {
+  margin-bottom: $spacing-xl;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.filterLabel {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.filterOption {
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: #F5F6F7;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &.selected {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.1);
+    border-color: rgba(22, 119, 255, 0.3);
+    font-weight: $font-weight-medium;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.filterFooter {
+  padding: $spacing-md $spacing-lg;
+  @include border-1px($color-border-light, top);
+}
+
+.resetBtn {
+  width: 100%;
+  height: 44px;
+  font-size: $font-size-md;
+  color: $color-primary;
+  background: rgba(22, 119, 255, 0.08);
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+  transition: all $transition-fast;
+
+  &:active {
+    background: rgba(22, 119, 255, 0.15);
+  }
 }
