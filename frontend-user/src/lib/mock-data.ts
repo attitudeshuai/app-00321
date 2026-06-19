@@ -54,6 +54,38 @@ export const fundCategories = [
   { id: 'money', name: '货币型' },
 ];
 
+// 风险等级
+export const riskLevels = [
+  { id: 'all', name: '全部风险' },
+  { id: 'r1', name: 'R1 谨慎型' },
+  { id: 'r2', name: 'R2 稳健型' },
+  { id: 'r3', name: 'R3 平衡型' },
+  { id: 'r4', name: 'R4 进取型' },
+  { id: 'r5', name: 'R5 激进型' },
+];
+
+// 基金公司
+export const fundCompanies = [
+  { id: 'all', name: '全部公司' },
+  { id: 'huaxia', name: '华夏基金' },
+  { id: 'yifangda', name: '易方达' },
+  { id: 'zhaoshang', name: '招商基金' },
+  { id: 'tianhong', name: '天弘基金' },
+  { id: 'gongyin', name: '工银瑞信' },
+  { id: 'nanfang', name: '南方基金' },
+  { id: 'jiashi', name: '嘉实基金' },
+  { id: 'fuguo', name: '富国基金' },
+];
+
+// 规模区间（单位：亿）
+export const scaleRanges = [
+  { id: 'all', name: '全部规模', min: 0, max: Infinity },
+  { id: 'small', name: '0-10亿', min: 0, max: 10 },
+  { id: 'medium', name: '10-50亿', min: 10, max: 50 },
+  { id: 'large', name: '50-100亿', min: 50, max: 100 },
+  { id: 'xlarge', name: '100亿以上', min: 100, max: Infinity },
+];
+
 // 基金列表数据
 export const fundListData = [
   {
@@ -64,6 +96,9 @@ export const fundListData = [
     nav: 2.3456,
     dayChange: 2.35,
     yearChange: 28.56,
+    riskLevel: 'r3',
+    company: 'huaxia',
+    scale: 156.78,
   },
   {
     id: '002',
@@ -73,6 +108,9 @@ export const fundListData = [
     nav: 1.8965,
     dayChange: -1.25,
     yearChange: 15.68,
+    riskLevel: 'r3',
+    company: 'yifangda',
+    scale: 678.92,
   },
   {
     id: '003',
@@ -82,6 +120,9 @@ export const fundListData = [
     nav: 1.2568,
     dayChange: 0.85,
     yearChange: -5.23,
+    riskLevel: 'r4',
+    company: 'zhaoshang',
+    scale: 45.36,
   },
   {
     id: '004',
@@ -91,6 +132,9 @@ export const fundListData = [
     nav: 1.0000,
     dayChange: 0.01,
     yearChange: 2.15,
+    riskLevel: 'r1',
+    company: 'tianhong',
+    scale: 12345.67,
   },
   {
     id: '005',
@@ -100,6 +144,9 @@ export const fundListData = [
     nav: 1.1256,
     dayChange: 0.12,
     yearChange: 4.56,
+    riskLevel: 'r2',
+    company: 'gongyin',
+    scale: 78.25,
   },
   {
     id: '006',
@@ -109,6 +156,9 @@ export const fundListData = [
     nav: 3.5689,
     dayChange: 3.68,
     yearChange: 45.23,
+    riskLevel: 'r4',
+    company: 'nanfang',
+    scale: 23.45,
   },
   {
     id: '007',
@@ -118,6 +168,9 @@ export const fundListData = [
     nav: 1.5236,
     dayChange: 1.12,
     yearChange: 12.36,
+    riskLevel: 'r3',
+    company: 'jiashi',
+    scale: 156.89,
   },
   {
     id: '008',
@@ -127,6 +180,9 @@ export const fundListData = [
     nav: 2.8956,
     dayChange: -0.56,
     yearChange: 22.15,
+    riskLevel: 'r3',
+    company: 'fuguo',
+    scale: 32.56,
   },
 ];
 

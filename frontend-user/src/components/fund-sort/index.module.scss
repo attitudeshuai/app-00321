@@ -1,0 +1,46 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.sortWrapper {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.sortBtn {
+  @include flex-align-center;
+  gap: $spacing-xxs;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: transparent;
+  border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.1);
+    font-weight: $font-weight-medium;
+  }
+
+  &:active {
+    background: rgba(22, 119, 255, 0.15);
+  }
+}
+
+.sortIcon {
+  color: currentColor;
+  transition: transform $transition-fast;
+  opacity: 0.5;
+
+  &.desc {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  &.asc {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
