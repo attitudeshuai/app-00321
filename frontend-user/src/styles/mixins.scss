@@ -1,0 +1,193 @@
+// ================================
+// SCSS 混入
+// ================================
+
+@import './variables.scss';
+
+// 文字省略 - 单行
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 文字省略 - 多行
+@mixin text-ellipsis-multi($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Flex 居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex 两端对齐
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Flex 垂直居中
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+// 卡片样式
+@mixin card {
+  background: $gradient-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-elevated;
+    transform: translateY(-2px);
+  }
+}
+
+// 安全区域底部内边距
+@mixin safe-area-bottom {
+  padding-bottom: calc($spacing-md + $safe-area-bottom);
+}
+
+// 安全区域顶部内边距
+@mixin safe-area-top {
+  padding-top: calc($spacing-md + $safe-area-top);
+}
+
+// 1px 边框 (适配高清屏)
+@mixin border-1px($color: $color-border, $direction: bottom) {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    
+    @if $direction == bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background-color: $color;
+      transform: scaleY(0.5);
+    } @else if $direction == top {
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 1px;
+      background-color: $color;
+      transform: scaleY(0.5);
+    } @else if $direction == left {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 1px;
+      background-color: $color;
+      transform: scaleX(0.5);
+    } @else if $direction == right {
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 1px;
+      background-color: $color;
+      transform: scaleX(0.5);
+    }
+  }
+}
+
+// 点击态
+@mixin tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    opacity: 0.7;
+    transition: opacity $transition-fast;
+  }
+}
+
+// 滚动条隐藏
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// 涨幅样式
+@mixin rise-style {
+  color: $color-rise;
+  background-color: $color-rise-bg;
+}
+
+// 跌幅样式
+@mixin fall-style {
+  color: $color-fall;
+  background-color: $color-fall-bg;
+}
+
+// 渐变背景
+@mixin gradient-primary {
+  background: $gradient-primary;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: shimmer 3s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-20%, -20%) rotate(180deg);
+  }
+}
+
+// 禁用状态
+@mixin disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// 骨架屏动画
+@mixin skeleton-animation {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

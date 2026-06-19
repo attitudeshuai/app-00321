@@ -1,0 +1,166 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.container {
+  @include card;
+  margin: 0 $spacing-md $spacing-sm;
+  padding: $spacing-lg $spacing-md;
+  background: $gradient-card;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-md;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.subtitle {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.indexList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.indexItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  border-radius: $radius-lg;
+  border: 1px solid rgba(22, 119, 255, 0.06);
+  transition: all $transition-normal;
+
+  &:active {
+    transform: translateX(4px);
+    box-shadow: $shadow-soft;
+    border-color: rgba(22, 119, 255, 0.12);
+  }
+}
+
+.indexInfo {
+  flex: 0 0 90px;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xxs;
+}
+
+.indexName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.indexCode {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.indexData {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xxs;
+}
+
+.current {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.change {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  &.rise {
+    color: $color-rise;
+  }
+
+  &.fall {
+    color: $color-fall;
+  }
+}
+
+.temperature {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $spacing-xxs;
+}
+
+.tempValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.tempText {
+  font-size: $font-size-xs;
+}
+
+.tempBar {
+  width: 80px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: $radius-full;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tempProgress {
+  height: 100%;
+  border-radius: $radius-full;
+  transition: width $transition-normal;
+}
+
+// 温度颜色
+.hot {
+  .tempValue,
+  .tempText {
+    color: $color-rise;
+  }
+  .tempProgress {
+    background: $color-rise;
+  }
+}
+
+.warm {
+  .tempValue,
+  .tempText {
+    color: #FA8C16;
+  }
+  .tempProgress {
+    background: #FA8C16;
+  }
+}
+
+.cool {
+  .tempValue,
+  .tempText {
+    color: $color-primary;
+  }
+  .tempProgress {
+    background: $color-primary;
+  }
+}
+
+.cold {
+  .tempValue,
+  .tempText {
+    color: $color-fall;
+  }
+  .tempProgress {
+    background: $color-fall;
+  }
+}

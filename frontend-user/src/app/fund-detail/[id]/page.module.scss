@@ -1,0 +1,374 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F8F9FA 0%, $color-bg-page 100%);
+  padding-top: calc($navbar-height + $safe-area-top);
+}
+
+// 核心信息
+.coreInfo {
+  background: $gradient-card;
+  padding: $spacing-xl $spacing-lg;
+  margin: 0 0 $spacing-md 0;
+  border-radius: 0 0 $radius-xl $radius-xl;
+  box-shadow: $shadow-soft;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+}
+
+.fundHeader {
+  @include flex-align-center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
+
+.fundName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.fundType {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  background: linear-gradient(135deg, rgba(22, 119, 255, 0.15) 0%, rgba(22, 119, 255, 0.08) 100%);
+  padding: 4px $spacing-sm;
+  border-radius: $radius-md;
+  border: 1px solid rgba(22, 119, 255, 0.2);
+  font-weight: $font-weight-medium;
+}
+
+.navInfo {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+  box-shadow: $shadow-soft;
+}
+
+.navItem {
+  flex: 1;
+  text-align: center;
+}
+
+.navValue {
+  display: block;
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xxs;
+
+  &.rise {
+    color: $color-rise;
+  }
+
+  &.fall {
+    color: $color-fall;
+  }
+}
+
+.navLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.navDivider {
+  width: 1px;
+  height: 32px;
+  background-color: $color-border-light;
+  margin: 0 $spacing-xs;
+}
+
+// 卡片通用样式
+.card {
+  background: $gradient-card;
+  padding: $spacing-lg;
+  margin: 0 $spacing-md $spacing-md;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+  transition: all $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-elevated;
+  }
+}
+
+.cardTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+// 基金经理
+.managerInfo {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.managerAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-full;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.managerDetail {
+  flex: 1;
+  min-width: 0;
+}
+
+.managerName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xxs;
+}
+
+.managerStats {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-xs;
+
+  .dot {
+    margin: 0 $spacing-xs;
+    color: $color-text-quaternary;
+  }
+}
+
+.managerIntro {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-relaxed;
+}
+
+// 收益走势
+.chartHeader {
+  @include flex-between;
+  margin-bottom: $spacing-md;
+}
+
+.timeRangeTabs {
+  display: flex;
+  gap: $spacing-xxs;
+}
+
+.timeRangeTab {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  background: transparent;
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+  transition: all $transition-normal;
+
+  &.active {
+    color: $color-primary;
+    background: linear-gradient(135deg, rgba(22, 119, 255, 0.15) 0%, rgba(22, 119, 255, 0.08) 100%);
+    border-color: rgba(22, 119, 255, 0.2);
+    font-weight: $font-weight-semibold;
+    box-shadow: 0 2px 4px rgba(22, 119, 255, 0.1);
+  }
+
+  &:not(.active):active {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
+    border-color: rgba(22, 119, 255, 0.15);
+  }
+}
+
+// 历史业绩
+.performanceTable {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+}
+
+.performanceRow {
+  @include flex-between;
+  padding: $spacing-md;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  border-radius: $radius-lg;
+  border: 1px solid rgba(22, 119, 255, 0.06);
+  transition: all $transition-fast;
+
+  &:active {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
+    border-color: rgba(22, 119, 255, 0.15);
+    transform: translateX(4px);
+  }
+}
+
+.performanceLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.performanceValue {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &.rise {
+    color: $color-rise;
+  }
+
+  &.fall {
+    color: $color-fall;
+  }
+}
+
+// 基金档案
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+}
+
+.profileItem {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xxs;
+  padding: $spacing-md;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  border-radius: $radius-lg;
+  border: 1px solid rgba(22, 119, 255, 0.06);
+  transition: all $transition-fast;
+
+  &:active {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
+    border-color: rgba(22, 119, 255, 0.15);
+    transform: scale(1.02);
+  }
+}
+
+.profileLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.profileValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+// 基金持仓
+.holdingList {
+  display: flex;
+  flex-direction: column;
+}
+
+.holdingItem {
+  @include flex-align-center;
+  padding: $spacing-md;
+  @include border-1px(rgba(22, 119, 255, 0.08), bottom);
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:active {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
+    transform: translateX(4px);
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.holdingRank {
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-text-tertiary;
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all $transition-fast;
+
+  .holdingItem:nth-child(1) & {
+    color: #fff;
+    background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
+  }
+
+  .holdingItem:nth-child(2) & {
+    color: #fff;
+    background: linear-gradient(135deg, #A8A8A8 0%, #8C8C8C 100%);
+    box-shadow: 0 4px 12px rgba(168, 168, 168, 0.3);
+  }
+
+  .holdingItem:nth-child(3) & {
+    color: #fff;
+    background: linear-gradient(135deg, #CD7F32 0%, #A0522D 100%);
+    box-shadow: 0 4px 12px rgba(205, 127, 50, 0.3);
+  }
+}
+
+.holdingInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.holdingName {
+  display: block;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xxs;
+}
+
+.holdingCode {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.holdingRatio {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+// 交易规则
+.ruleList {
+  display: flex;
+  flex-direction: column;
+}
+
+.ruleItem {
+  @include flex-between;
+  padding: $spacing-md;
+  @include border-1px(rgba(22, 119, 255, 0.08), bottom);
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:active {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
+    transform: translateX(4px);
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.ruleLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.ruleValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+// 底部安全区域
+.safeAreaBottom {
+  height: calc($spacing-md + $safe-area-bottom);
+}

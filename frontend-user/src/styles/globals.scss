@@ -1,0 +1,216 @@
+// ================================
+// 全局样式
+// ================================
+
+@import './variables.scss';
+@import './mixins.scss';
+
+// CSS Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  background-color: $color-bg-page;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// 链接样式
+a {
+  color: inherit;
+  text-decoration: none;
+  @include tap-highlight;
+}
+
+// 图片
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+// 列表
+ul,
+ol {
+  list-style: none;
+}
+
+// 按钮重置
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  @include tap-highlight;
+}
+
+// 输入框重置
+input,
+textarea {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  -webkit-appearance: none;
+}
+
+// 滚动行为
+html {
+  scroll-behavior: smooth;
+}
+
+// 页面容器
+.page-container {
+  min-height: 100vh;
+  background-color: $color-bg-page;
+  padding-bottom: $safe-area-bottom;
+}
+
+// 内容区域
+.content-area {
+  padding: $spacing-md;
+}
+
+// 卡片通用样式
+.card {
+  @include card;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+
+  // 移动端禁用 hover
+  @media (hover: none) {
+    &:hover {
+      transform: none;
+      box-shadow: $shadow-card;
+    }
+  }
+}
+
+// 分割线
+.divider {
+  height: 1px;
+  background-color: $color-border-light;
+  margin: $spacing-md 0;
+}
+
+// 文字颜色工具类
+.text-primary {
+  color: $color-text-primary;
+}
+
+.text-secondary {
+  color: $color-text-secondary;
+}
+
+.text-tertiary {
+  color: $color-text-tertiary;
+}
+
+.text-rise {
+  color: $color-rise;
+}
+
+.text-fall {
+  color: $color-fall;
+}
+
+.text-brand {
+  color: $color-primary;
+}
+
+// 字体大小工具类
+.text-xs {
+  font-size: $font-size-xs;
+}
+
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-md {
+  font-size: $font-size-md;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+.text-xl {
+  font-size: $font-size-xl;
+}
+
+// 字重工具类
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+// 安全区域
+.safe-area-top {
+  @include safe-area-top;
+}
+
+.safe-area-bottom {
+  @include safe-area-bottom;
+}
+
+// react-vant 样式覆盖
+:root:root {
+  --rv-primary-color: #{$color-primary};
+  --rv-success-color: #{$color-fall};
+  --rv-danger-color: #{$color-rise};
+  --rv-text-color: #{$color-text-primary};
+  --rv-border-color: #{$color-border};
+}
+
+// 骨架屏
+.skeleton {
+  @include skeleton-animation;
+  border-radius: $radius-sm;
+}
+
+// 加载状态
+.loading-container {
+  @include flex-center;
+  min-height: 200px;
+  color: $color-text-tertiary;
+}
+
+// 空状态
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-xxl;
+  color: $color-text-tertiary;
+  
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: $spacing-md;
+  }
+  
+  .empty-text {
+    font-size: $font-size-md;
+  }
+}

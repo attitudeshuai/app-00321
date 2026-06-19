@@ -1,0 +1,118 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.assetCard {
+  background: $gradient-primary;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  color: #fff;
+  margin: $spacing-md;
+  box-shadow: 
+    0 8px 32px rgba(22, 119, 255, 0.25),
+    0 2px 8px rgba(22, 119, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+
+  // 装饰性光效
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 10s linear infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-xs;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  font-size: $font-size-sm;
+  opacity: 0.9;
+}
+
+.eyeBtn {
+  @include flex-center;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity $transition-fast;
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.totalAsset {
+  font-size: $font-size-display;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-lg;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.profitRow {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profitItem {
+  flex: 1;
+  text-align: center;
+}
+
+.profitLabel {
+  display: block;
+  font-size: $font-size-xs;
+  opacity: 0.8;
+  margin-bottom: $spacing-xxs;
+}
+
+.profitValue {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+}
+
+.rise {
+  color: #FFD666;
+}
+
+.fall {
+  color: #95DE64;
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 $spacing-xs;
+}

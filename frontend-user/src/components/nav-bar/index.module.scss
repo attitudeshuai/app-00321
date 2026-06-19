@@ -1,0 +1,60 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.navbar {
+  @include flex-between;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-fixed;
+  height: calc($navbar-height + $safe-area-top);
+  padding: 0 $spacing-md;
+  padding-top: $safe-area-top;
+  background-color: $color-bg-card;
+  @include border-1px($color-border-light, bottom);
+
+  &.transparent {
+    background-color: transparent;
+    
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.left {
+  flex: 0 0 60px;
+  display: flex;
+  align-items: center;
+}
+
+.backBtn {
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  margin-left: -$spacing-xs;
+  color: $color-text-primary;
+  border-radius: $radius-full;
+  transition: background-color $transition-fast;
+
+  &:active {
+    background-color: $color-border-light;
+  }
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.right {
+  flex: 0 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

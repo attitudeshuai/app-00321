@@ -1,0 +1,78 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.container {
+  @include card;
+  margin: 0 $spacing-md $spacing-sm;
+  padding: $spacing-lg $spacing-md;
+  background: $gradient-card;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: unset;
+}
+
+.entryItem {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  position: relative;
+
+  &:active {
+    background: linear-gradient(135deg, rgba(22, 119, 255, 0.03) 0%, rgba(22, 119, 255, 0.01) 100%);
+  }
+}
+
+.iconWrapper {
+  @include flex-center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #E6F4FF 0%, #F0F5FF 50%, #E6F7FF 100%);
+  border-radius: $radius-xl;
+  transition: all $transition-normal;
+  box-shadow: 
+    0 2px 8px rgba(22, 119, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(22, 119, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity $transition-normal;
+  }
+
+  .entryItem:active & {
+    transform: scale(0.92) translateY(2px);
+    box-shadow: 
+      0 1px 4px rgba(22, 119, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.name {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  text-align: center;
+}
