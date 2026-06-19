@@ -7,24 +7,83 @@
   padding-top: calc($navbar-height + $safe-area-top);
 }
 
-// 分类标签
-.categoryWrapper {
+// 顶部筛选区域
+.filterWrapper {
   position: sticky;
-  top: 0;
+  // 吸顶位置紧贴导航栏底部（导航栏含安全区高度），避免被 fixed 导航栏遮挡
+  top: calc($navbar-height + $safe-area-top);
+  // 必须低于导航栏 ($z-index-fixed = 1030)，但高于普通内容
   z-index: $z-index-sticky - 1;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
-  padding: $spacing-md;
+  padding: $spacing-md $spacing-md $spacing-xs;
   @include border-1px(rgba(22, 119, 255, 0.08), bottom);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+// 搜索框
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 $spacing-sm;
+  background: linear-gradient(135deg, #F5F7FA 0%, #EEF2F7 100%);
+  border: 1px solid rgba(22, 119, 255, 0.1);
+  border-radius: $radius-full;
+  transition: all $transition-fast;
+
+  &:focus-within {
+    border-color: rgba(22, 119, 255, 0.4);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.08);
+  }
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: $color-text-tertiary;
+  margin-right: $spacing-xs;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+}
+
+.clearBtn {
+  flex-shrink: 0;
+  @include flex-center;
+  width: 20px;
+  height: 20px;
+  border-radius: $radius-full;
+  background: rgba(0, 0, 0, 0.1);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:active {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 分类标签
 .categoryList {
   display: flex;
   gap: $spacing-xs;
   overflow-x: auto;
   @include hide-scrollbar;
   // 留出足够空间避免 tab 的 box-shadow(0 4px 12px) 被裁切
-  padding: 14px 0;
+  padding: 14px 0 10px;
 }
 
 .categoryItem {
@@ -57,17 +116,82 @@
     font-weight: $font-weight-semibold;
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(22, 119, 255, 0.3);
-    // transform: scale(1.05);
-
-    // &::before {
-    //   left: 100%;
-    // }
   }
 
   &:not(.active):active {
     background: linear-gradient(135deg, #F0F5FF 0%, #E6F4FF 100%);
     border-color: rgba(22, 119, 255, 0.2);
-    // transform: scale(0.98);
+  }
+}
+
+// 多维度筛选组
+.filterGroups {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding-top: $spacing-xs;
+  @include border-1px(rgba(22, 119, 255, 0.06), top);
+  margin-top: $spacing-xxs;
+}
+
+.filterRow {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-xs;
+}
+
+.filterLabel {
+  flex-shrink: 0;
+  width: 32px;
+  padding-top: 6px;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+}
+
+.filterOptions {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xxs $spacing-xs;
+}
+
+.filterChip {
+  padding: 4px 10px;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: #F5F7FA;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  cursor: pointer;
+
+  &.active {
+    color: $color-primary;
+    background: rgba(22, 119, 255, 0.1);
+    border-color: rgba(22, 119, 255, 0.25);
+    font-weight: $font-weight-medium;
+  }
+
+  &:not(.active):active {
+    background: #EAEEF3;
+  }
+}
+
+.resetBtn {
+  align-self: flex-end;
+  margin-top: $spacing-xxs;
+  padding: 4px 10px;
+  font-size: $font-size-sm;
+  color: $color-primary;
+  background: transparent;
+  border: 1px dashed rgba(22, 119, 255, 0.3);
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:active {
+    background: rgba(22, 119, 255, 0.08);
   }
 }
 
@@ -85,7 +209,7 @@
 
 .sortOptions {
   display: flex;
-  gap: $spacing-md;
+  gap: $spacing-xs;
 }
 
 .sortBtn {
@@ -95,12 +219,15 @@
   font-size: $font-size-sm;
   color: $color-text-secondary;
   background: transparent;
+  border: none;
   border-radius: $radius-md;
   transition: all $transition-fast;
+  cursor: pointer;
 
   &.active {
     color: $color-primary;
     background: rgba(22, 119, 255, 0.1);
+    font-weight: $font-weight-medium;
   }
 
   &:active {
